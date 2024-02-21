@@ -1,2 +1,2 @@
-# CS320Project
+# Battleships
  CS320 Project Repository of Our Team
