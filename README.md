@@ -1,5 +1,5 @@
 # Battleships
- CS320 Project Repository of Our Team
+ CS320 Project Repository of Our Team (2024 Spring)
 # References
 <!-- too add new reference =>  * [_REF-#: <Reference Title>_](<Reference link>) -->
 * [_REF-1: Battleship (game)_](https://en.wikipedia.org/wiki/Battleship_(game))
