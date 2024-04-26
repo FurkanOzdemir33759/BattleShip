@@ -1,9 +1,11 @@
 package GameManager;
 
+import GameManager.Interfaces.IGameStats;
+
 /**
  * This class manages the game status.
  */
-public class GameStats {
+public class GameStats implements IGameStats {
     /**
      * Represents the information about the game status.
      */
@@ -17,18 +19,26 @@ public class GameStats {
     }
 
     /**
-     * Gets the game status.
-     * @return The game status.
+     * Gets the status information.
+     * @return The status information.
      */
-    public GameStatInfo getStatus() {
+    public final GameStatInfo getStatusInfo() {
         return statInfo;
     }
 
     /**
-     * Sets the game status.
-     * @param nextGameStatus The next game status as GameStatInfo instance.
+     * Gets the status as a GameStats instance.
+     * @return The status.
      */
-    public void setStatus(GameStatInfo nextGameStatus) {
+    public final GameStats getStatus() {
+        return this;
+    }
+
+    /**
+     * Sets the status according to the gameStatInfo passed.
+     * @param nextGameStatus The new status.
+     */
+    public final void setStatus(GameStatInfo nextGameStatus) {
         statInfo = nextGameStatus;
     }
 }
