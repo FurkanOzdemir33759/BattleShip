@@ -3,7 +3,7 @@ package GameManager;
 import GameManager.Interfaces.IGameStarter;
 
 /**
- * Represents a GameStarter object that will initialize the game depending on the information passed to it.
+ * Represents a GameStarter class that will initialize the game depending on the information passed to it.
  */
 public class GameStarter implements IGameStarter {
 
@@ -21,8 +21,8 @@ public class GameStarter implements IGameStarter {
     }
 
     /**
-     * Starts the game according to the gameSettings parameter given.
-     * @param gameSettings Container class that holds the information necessary for starting a game.
+     * Starts the game according to the gameSettings given.
+     * @param gameSettings Holds the information necessary for starting a game.
      */
     public final void startGame(GameStartInfo gameSettings) {
         // TO DO
