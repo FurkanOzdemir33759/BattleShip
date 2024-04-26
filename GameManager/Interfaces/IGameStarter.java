@@ -11,5 +11,5 @@ public interface IGameStarter {
      * Starts the game according to start information.
      * @param gameStartInfo Container class that holds the information necessary for starting a game.
      */
-    public void startGame(GameStartInfo gameStartInfo);
+    void startGame(GameStartInfo gameStartInfo);
 }

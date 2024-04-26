@@ -48,14 +48,11 @@ public class GameFinishInfo {
      * @return The winner as enum.
      */
     public Player getWinnerAsEnum() throws IllegalArgumentException {
-        switch (winner) {
-            case 0:
-                return Player.P1;
-            case 1:
-                return Player.P2;
-            default:
-                throw new IllegalArgumentException("Invalid winner number: " + winner);
-        }
+        return switch (winner) {
+            case 0 -> Player.P1;
+            case 1 -> Player.P2;
+            default -> throw new IllegalArgumentException("Invalid winner number: " + winner);
+        };
     }
 
     /**
