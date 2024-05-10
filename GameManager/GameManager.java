@@ -26,4 +26,11 @@ public class GameManager implements IGameManager {
     public final void endGame() {
         //TO DO
     }
+
+    /**
+     * The constructor for the game manager.
+     */
+    public GameManager() {
+
+    }
 }
