@@ -1,8 +1,9 @@
 package GUI;
 
+import javax.swing.*;
 import GameManager.GameManager;
 
-public class View {
+public class View extends JFrame {
     /**
      * The game manager.
      */
@@ -33,12 +34,21 @@ public class View {
      */
     public View(GameManager manager) {
         this.manager = manager;
+        this.renderer = new Renderer();
     }
 
     /**
      * Sets the game board according to the game manager configuration.
      */
     private void setGameBoard() {
-        manager.
+        //TO DO
+    }
+
+    private void setMainMenu() {
+        //TO DO
+    }
+
+    private void setNotification() {
+        //TO DO
     }
 }
