@@ -19,5 +19,5 @@ public interface IGameBoard {
      * @param x the x-coordinate of the attack
      * @param y the y-coordinate of the attack
      */
-    void attack(int x, int y);
+    String receiveAttack(int x, int y);
 }
