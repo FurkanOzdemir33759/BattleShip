@@ -1,9 +1,8 @@
 package GUI;
 
-import javax.swing.*;
 import GameManager.GameManager;
 
-public class View extends JFrame {
+public class View {
     /**
      * The game manager.
      */
@@ -34,7 +33,7 @@ public class View extends JFrame {
      */
     public View(GameManager manager) {
         this.manager = manager;
-        this.renderer = new Renderer();
+        renderer = new Renderer();
     }
 
     /**

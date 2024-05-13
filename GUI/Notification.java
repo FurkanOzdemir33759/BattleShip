@@ -2,7 +2,9 @@ package GUI;
 
 import GUI.Interfaces.INotification;
 
-public class Notification implements INotification {
+import javax.swing.*;
+
+public class Notification extends JPanel implements INotification {
     @Override
     public void displayHitMiss() {
         // Implementation code here
@@ -13,5 +15,9 @@ public class Notification implements INotification {
     public void displayGameResults() {
         // Implementation code here
 
+    }
+
+    Notification() {
+        add(new JLabel("NOTIFICATION"));
     }
 }
