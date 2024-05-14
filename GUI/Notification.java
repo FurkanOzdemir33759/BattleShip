@@ -3,21 +3,31 @@ package GUI;
 import GUI.Interfaces.INotification;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Notification extends JPanel implements INotification {
-    @Override
-    public void displayHitMiss() {
-        // Implementation code here
-
+    private JLabel notificationLabel;
+    public Notification() {
+        setLayout(new BorderLayout());
+        notificationLabel = new JLabel("NOTIFICATION", SwingConstants.CENTER);
+        add(notificationLabel, BorderLayout.CENTER);
     }
 
     @Override
-    public void displayGameResults() {
-        // Implementation code here
-
+    public void displayHitMiss(boolean isHit) {
+        if (isHit) {
+            notificationLabel.setText("Hit!");
+            notificationLabel.setForeground(Color.RED);
+        } else {
+            notificationLabel.setText("Miss!");
+            notificationLabel.setForeground(Color.BLUE);
+        }
     }
 
-    Notification() {
-        add(new JLabel("NOTIFICATION"));
+    @Override
+    public void displayGameResults(String result) {
+        notificationLabel.setText(result);
+        notificationLabel.setForeground(Color.GREEN);
     }
+
 }
