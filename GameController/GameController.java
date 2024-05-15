@@ -1,5 +1,8 @@
 package GameController;
 
+import GUI.GameBoard;
+import GUI.MainMenu;
+import GUI.Notification;
 import GameManager.GameManager;
 import GUI.View;
 
@@ -11,6 +14,11 @@ public class GameController {
      * The manager of the game.
      */
     private GameManager manager;
+    private MainMenu mainMenu;
+    private GameBoard gameBoard;
+    private Notification notification;
+    private boolean itsPlayersTurn;
+
 
     /**
      * The view of the game.
@@ -25,6 +33,10 @@ public class GameController {
     public GameController(GameManager manager, View view) {
         this.manager = manager;
         this.view = view;
+        this.itsPlayersTurn = true;
+        this.mainMenu = new MainMenu();
+        this.gameBoard = new GameBoard();
+        this.notification = new Notification();
     }
 
     /**
@@ -48,6 +60,32 @@ public class GameController {
      */
     public void updateManager() {
         //TO DO
+    }
+    /*
+    Game starts by showing the main menu and sets the game board.
+     */
+    public void startGame(){
+       if(mainMenu != null){
+           mainMenu.show();
+       }
+       setupGameBoard();
+       showNotification("Welcome to Battleship!");
+    }
+    /*
+    Game board set to be played.
+     */
+    private void setupGameBoard(){
+        if(gameBoard!=null){
+
+        }
+    }
+    /*
+    Notification method
+     */
+    private void showNotification(String message){
+        if(notification !=null){
+            System.out.println(message);
+        }
     }
 
     /**

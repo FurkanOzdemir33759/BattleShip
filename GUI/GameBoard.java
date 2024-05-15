@@ -22,7 +22,7 @@ public class GameBoard extends JPanel implements IGameBoard {
 
     }
 
-    GameBoard() {
+    public GameBoard() {
         add(new JLabel("GAME BOARD!"));
     }
 }

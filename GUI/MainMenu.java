@@ -31,7 +31,7 @@ public class MainMenu extends JPanel implements IMainMenu {
 
     }
 
-    MainMenu() {
+    public MainMenu() {
         setLayout(null);
         JLabel gameName = new JLabel("BATTLESHIP ");
         gameName.setFont(new Font("Georgia",Font.BOLD,40));
