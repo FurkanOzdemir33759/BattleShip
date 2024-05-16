@@ -33,6 +33,9 @@ public class Square extends JPanel {
         this.isHit = isHit;
         setBackground(isHit ? Color.RED : (isOccupied ? Color.GRAY : Color.BLUE));
     }
+    public boolean isHit() {
+        return isHit;
+    }
 
     @Override
     protected void paintComponent(Graphics g) {

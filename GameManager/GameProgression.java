@@ -1,11 +1,25 @@
 package GameManager;
 
 import GameManager.Interfaces.IGameProgression;
+import GUI.GameBoard;
+import GUI.Notification;
+import GUI.Square;
+
 
 /**
  * This class manages the progression of the game.
  */
 public class GameProgression implements IGameProgression {
+    private GameBoard gameBoard;
+    private Notification notification;
+    private boolean playerTurn;
+
+    public GameProgression(GameBoard gameBoard, Notification notification) {
+        this.gameBoard = gameBoard;
+        this.notification = notification;
+        this.playerTurn = true;
+    }
+
     /**
      * Evaluates the current play.
      * @param playInfo The play info of the current turn.
@@ -21,8 +35,19 @@ public class GameProgression implements IGameProgression {
      * @return Whether it was a hit or miss. Hit -> true, Miss -> false
      */
     public boolean attack(int x, int y) {
-        //TO DO
-        return true;
+        Square targetSquare = gameBoard.getSquare(x, y);
+        if (targetSquare.isHit()) {
+            notification.displayHitMiss(false); // Already attacked, treated as a miss for feedback
+            return false;
+        }
+        targetSquare.setHit(true);
+        if (targetSquare.hasShip()) {
+            notification.displayHitMiss(true); // Hit
+            return true;
+        } else {
+            notification.displayHitMiss(false); // Miss
+            return false;
+        }
     }
 
     /**
@@ -32,7 +57,12 @@ public class GameProgression implements IGameProgression {
      * @return Whether the placement was successful or not.
      */
     public boolean place(int x, int y) {
-        //TO DO
+        Square targetSquare = gameBoard.getSquare(x, y);
+        if (targetSquare.hasShip()) {
+            notification.displayGameResults("There is already a ship here."); // Placement failed
+            return false;
+        }
+        targetSquare.setShip(true);
         return true;
     }
 
