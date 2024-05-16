@@ -75,9 +75,8 @@ public class GameController {
     Game board set to be played.
      */
     private void setupGameBoard(){
-        if(gameBoard!=null){
+        this.gameBoard = new GameBoard();
 
-        }
     }
     /*
     Notification method
@@ -93,5 +92,6 @@ public class GameController {
      */
     public void updateView() {
         //TO DO
+
     }
 }

@@ -61,6 +61,9 @@ public class Renderer extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
+    public void renderer(GameBoard gameBoard, MainMenu mainMenu, Notification notification){
+        //TO DO
+    }
 
     void setMainMenu(MainMenu mainMenu) {
         this.mainMenu = mainMenu;

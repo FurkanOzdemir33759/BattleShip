@@ -41,13 +41,19 @@ public class View {
      */
     private void setGameBoard() {
         //TO DO
+        this.gameBoard = new GameBoard();
     }
 
     private void setMainMenu() {
         //TO DO
+        this.mainMenu = new MainMenu();
     }
 
     private void setNotification() {
+        //TO DO
+        this.notification = new Notification();
+    }
+    public void update(){
         //TO DO
     }
 }
