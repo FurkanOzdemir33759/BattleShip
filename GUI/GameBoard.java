@@ -25,7 +25,7 @@ public class GameBoard extends JPanel implements IGameBoard {
                 add(square);
             }
         }
-        add(new JLabel("GAME BOARD!"));
+
     }
     private void initializeBoard() {
         for (int i = 0; i < 10; i++) {

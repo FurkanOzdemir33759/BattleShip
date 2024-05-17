@@ -26,6 +26,7 @@ public class Renderer extends JFrame {
 
         setTitle("BattleShip");
         setSize(1280, 720);
+        setResizable(false);
 
         uiPass = new JPanel();
         uiPass.setOpaque(false);
@@ -59,6 +60,9 @@ public class Renderer extends JFrame {
 
 
         panelPass.setBounds(0, 0, 1280, 720);
+
+        Dimension panelSize = panelPass.getPreferredSize();
+        panelPass.setBounds((1280 - panelSize.width) / 2, (720 - panelSize.height) / 2, panelSize.width, panelSize.height);
 
         layeredPane.add(panelPass,JLayeredPane.DEFAULT_LAYER);
 
