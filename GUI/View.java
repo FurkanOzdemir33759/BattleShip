@@ -33,26 +33,27 @@ public class View {
      */
     public View(GameManager manager) {
         this.manager = manager;
-        renderer = new Renderer();
-    }
 
-    /**
-     * Sets the game board according to the game manager configuration.
-     */
-    private void setGameBoard() {
-        //TO DO
-        this.gameBoard = new GameBoard();
-    }
-
-    private void setMainMenu() {
-        //TO DO
-        this.mainMenu = new MainMenu();
-    }
-
-    private void setNotification() {
-        //TO DO
         this.notification = new Notification();
+        this.mainMenu = new MainMenu();
+        this.gameBoard = new GameBoard();
+
+        renderer = new Renderer(this.mainMenu);
     }
+
+    public  void displayGameBoard(){
+        renderer.Render(getGameBoard());
+
+    }
+    public  void displaySettings(){
+        renderer.Render(getNotification());
+
+    }
+
+    public MainMenu getMainMenu() {return this.mainMenu;}
+    public GameBoard getGameBoard() {return this.gameBoard;}
+    public Notification getNotification() {return this.notification;}
+
     public void update(){
         //TO DO
     }

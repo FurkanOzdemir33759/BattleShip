@@ -8,4 +8,5 @@ public class Main {
         View view = new View(manager);
         GameController controller = new GameController(manager, view);
     }
+
 }

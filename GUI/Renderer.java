@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
  * This class is responsible for rendering the game.
  */
 public class Renderer extends JFrame {
-    private CardLayout cardLayout;
+
     private JPanel container;
 
     /**
@@ -18,55 +18,30 @@ public class Renderer extends JFrame {
      */
     private Phase phase = Phase.MAIN_MENU;
 
-    /**
-     * The main menu to be rendered when the application starts.
-     */
-    private MainMenu mainMenu;
 
-    /**
-     * The game board to be rendered when the game begins.
-     */
-    private GameBoard gameBoard;
+    private JPanel currentPanel;
+    Renderer(JPanel initialPanel) {
 
-    /**
-     * Notifications to show during the game.
-     */
-    private Notification notification;
-    Renderer() {
-        cardLayout = new CardLayout();
-        container = new JPanel(cardLayout);
-
-        mainMenu = new MainMenu();
-        gameBoard = new GameBoard();
-        notification = new Notification();
 
         setTitle("BattleShip");
         setSize(1280, 720);
 
-        add(container);
+        currentPanel = initialPanel;
 
-        container.add(mainMenu, "mainMenu");
-        container.add(gameBoard, "gameBoard");
-        container.add(notification, "notification");
-
-        JButton next = new JButton("next");
-        next.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.next(container);
-            }
-        });
-        add(next, BorderLayout.SOUTH);
+        //setContentPane(currentPanel);
+        add(currentPanel);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
-    public void renderer(GameBoard gameBoard, MainMenu mainMenu, Notification notification){
-        //TO DO
-    }
 
-    void setMainMenu(MainMenu mainMenu) {
-        this.mainMenu = mainMenu;
+
+    public  void Render( JPanel panel){
+        remove(currentPanel);
+        currentPanel = panel;
+        add(currentPanel);
+        validate();
+
     }
 
 

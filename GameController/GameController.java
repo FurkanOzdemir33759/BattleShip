@@ -14,11 +14,9 @@ public class GameController {
      * The manager of the game.
      */
     private GameManager manager;
-    private MainMenu mainMenu;
-    private GameBoard gameBoard;
-    private Notification notification;
-    private boolean itsPlayersTurn;
 
+
+    private boolean itsPlayersTurn;
 
     /**
      * The view of the game.
@@ -34,9 +32,18 @@ public class GameController {
         this.manager = manager;
         this.view = view;
         this.itsPlayersTurn = true;
-        this.mainMenu = new MainMenu();
-        this.gameBoard = new GameBoard();
-        this.notification = new Notification();
+
+
+        view.getMainMenu().getStartButton().addActionListener(e->{
+
+            view.displayGameBoard();
+
+        });
+
+        view.getMainMenu().getExitButton().addActionListener(e -> {
+            System.exit(0);
+
+        });
     }
 
     /**
@@ -65,9 +72,7 @@ public class GameController {
     Game starts by showing the main menu and sets the game board.
      */
     public void startGame(){
-       if(mainMenu != null){
-           mainMenu.show();
-       }
+
        setupGameBoard();
        showNotification("Welcome to Battleship!");
     }
@@ -75,16 +80,14 @@ public class GameController {
     Game board set to be played.
      */
     private void setupGameBoard(){
-        this.gameBoard = new GameBoard();
+
 
     }
     /*
     Notification method
      */
     private void showNotification(String message){
-        if(notification !=null){
-            System.out.println(message);
-        }
+
     }
 
     /**
