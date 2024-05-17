@@ -18,7 +18,7 @@ public class GameBoard extends JPanel implements IGameBoard {
         this.board = new ArrayList<>();
         this.notification = new Notification();
         initializeBoard();
-        setPreferredSize(new Dimension(300, 300));
+        setPreferredSize(new Dimension(600, 600));
         setLayout(new GridLayout(10, 10));
         for (List<Square> row : board) {
             for (Square square : row) {
