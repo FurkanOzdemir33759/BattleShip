@@ -11,6 +11,8 @@ import java.util.List;
  * Concrete class representing the game board.
  */
 public class GameBoard extends JPanel implements IGameBoard {
+    private JLabel gameStats = new JLabel();
+    private JPanel boardPanel = new JPanel();
     private List<List<Square>> board;
     private Notification notification; // To display messages to the user
 
@@ -18,13 +20,23 @@ public class GameBoard extends JPanel implements IGameBoard {
         this.board = new ArrayList<>();
         this.notification = new Notification();
         initializeBoard();
-        setPreferredSize(new Dimension(600, 600));
-        setLayout(new GridLayout(10, 10));
+        setPreferredSize(new Dimension(600, 700));
+        setLayout(new BorderLayout());
+
+
+        boardPanel.setLayout(new GridLayout(10, 10));
+
+        gameStats.setText("DUMMY TEXT!");
+        gameStats.setPreferredSize(new Dimension(600, 100));
+        add(gameStats, BorderLayout.NORTH);
+
         for (List<Square> row : board) {
             for (Square square : row) {
-                add(square);
+                boardPanel.add(square);
             }
         }
+
+        add(boardPanel, BorderLayout.CENTER);
 
     }
     private void initializeBoard() {
