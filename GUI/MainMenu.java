@@ -39,6 +39,7 @@ public class MainMenu extends JPanel implements IMainMenu {
         JLabel gameName = new JLabel("BATTLESHIP ");
         gameName.setFont(new Font("Georgia",Font.BOLD,40));
         gameName.setBounds(500,50,300,150);
+        JLabel background1 = new JLabel(new ImageIcon("Resources/Background1.jpeg"));
 
         playButton = new JButton("PLAY");
         playButton.setFont(new Font("Georgia", Font.PLAIN,20));
@@ -52,10 +53,19 @@ public class MainMenu extends JPanel implements IMainMenu {
         exitButton.setFont(new Font("Georgia", Font.PLAIN,20));
         exitButton.setBounds(540,400,200,50);
 
+        background1.setVisible(true);
+        background1.setIcon(new ImageIcon("Resources/Background1.jpeg"));
+        background1.setText("Background not loaded");
+        background1.setBounds(0,0,1280,720);
+
+
+
+
         add(gameName);
         add(playButton);
         add(settingsButton);
         add(exitButton);
+        add(background1);
 
     }
 

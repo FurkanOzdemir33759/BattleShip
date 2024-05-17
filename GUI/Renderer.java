@@ -3,8 +3,7 @@ package GUI;
 import GUI.Enums.Phase;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 /**
  * This class is responsible for rendering the game.
@@ -18,6 +17,7 @@ public class Renderer extends JFrame {
      */
     private Phase phase = Phase.MAIN_MENU;
 
+
     private JLayeredPane layeredPane;
     private JPanel panelPass;
 
@@ -27,6 +27,8 @@ public class Renderer extends JFrame {
         setTitle("BattleShip");
         setSize(1280, 720);
         setResizable(false);
+        Image icon = Toolkit.getDefaultToolkit().getImage("Resources/AppIcon.jpeg");
+        setIconImage(icon);
 
         uiPass = new JPanel();
         uiPass.setOpaque(false);
