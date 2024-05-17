@@ -64,7 +64,18 @@ public class Renderer extends JFrame {
     public void renderer(GameBoard gameBoard, MainMenu mainMenu, Notification notification){
         //TO DO
     }
+    public void renderGameBoard() {
+        cardLayout.show(container, "gameBoard");
+    }
 
+    public void renderMainMenu() {
+        cardLayout.show(container, "mainMenu");
+    }
+
+    public void renderNotification(String message) {
+        notification.displayGameResults(message);
+        cardLayout.show(container, "notification");
+    }
     void setMainMenu(MainMenu mainMenu) {
         this.mainMenu = mainMenu;
     }

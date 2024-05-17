@@ -3,6 +3,8 @@ package GUI;
 import GUI.Interfaces.IGameBoard;
 
 import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +14,28 @@ public class GameBoard extends JPanel implements IGameBoard {
     private List<List<Square>> board;
     private Notification notification; // To display messages to the user
 
-
+    public GameBoard() {
+        this.board = new ArrayList<>();
+        this.notification = new Notification();
+        initializeBoard();
+        setPreferredSize(new Dimension(300, 300));
+        setLayout(new GridLayout(10, 10));
+        for (List<Square> row : board) {
+            for (Square square : row) {
+                add(square);
+            }
+        }
+        add(new JLabel("GAME BOARD!"));
+    }
+    private void initializeBoard() {
+        for (int i = 0; i < 10; i++) {
+            List<Square> row = new ArrayList<>();
+            for (int j = 0; j < 10; j++) {
+                row.add(new Square(i, j));
+            }
+            board.add(row);
+        }
+    }
     @Override
     public void placeShip(int x, int y, String orientation) {
         // Implementation code here
@@ -33,7 +56,5 @@ public class GameBoard extends JPanel implements IGameBoard {
     }
 
 
-    public GameBoard() {
-        add(new JLabel("GAME BOARD!"));
-    }
+
 }

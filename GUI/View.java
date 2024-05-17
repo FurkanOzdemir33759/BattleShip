@@ -42,6 +42,7 @@ public class View {
     private void setGameBoard() {
         //TO DO
         this.gameBoard = new GameBoard();
+
     }
 
     private void setMainMenu() {
