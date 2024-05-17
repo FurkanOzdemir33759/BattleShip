@@ -15,9 +15,11 @@ import java.util.List;
  */
 public class GameBoard extends JPanel implements IGameBoard {
     private JPanel shipSelectionPanel = new JPanel();
+    private ArrayList<ShipSelectorButton> shipSelectionButtons = new ArrayList<>();
     private JLabel gameStats = new JLabel();
     private JPanel boardPanel = new JPanel();
     private List<List<Square>> board;
+    private ShipObject selectedShip = null;
     private Notification notification; // To display messages to the user
 
     public GameBoard() {
@@ -29,14 +31,14 @@ public class GameBoard extends JPanel implements IGameBoard {
 
         boardPanel.setLayout(new GridLayout(10, 10));
 
-        gameStats.setText("DUMMY TEXT!");
+        gameStats.setText("P1: Place Your Ships!");
         gameStats.setPreferredSize(new Dimension(600, 100));
         add(gameStats, BorderLayout.NORTH);
 
 
         shipSelectionPanel.setLayout(new GridLayout(5, 1));
         add(shipSelectionPanel, BorderLayout.WEST);
-        addShipSelectionButtons(shipSelectionPanel);
+        addShipSelectionButtons();
 
         for (List<Square> row : board) {
             for (Square square : row) {
@@ -85,12 +87,16 @@ public class GameBoard extends JPanel implements IGameBoard {
         }
     }
 
-    private class ShipSelectorButton extends JPanel {
+    class ShipSelectorButton extends JPanel {
         private JButton button;
         private JLabel counter;
         private int max_allowed;
         private int current_count;
         private JPanel shipDisplayer;
+
+        JButton getShipSelectorButton() {
+            return button;
+        }
 
         private ShipSelectorButton(String buttonName, int max_allowed, ShipObject shipObject, Color shipColor) {
             setLayout(new FlowLayout());
@@ -111,8 +117,6 @@ public class GameBoard extends JPanel implements IGameBoard {
 
             int col_count = shipObject.getShipLayoutForButton().size();
 
-
-
             shipDisplayer.setLayout(new GridLayout(1, col_count));
 
             for (int i = 0; i < col_count + 1; i++) {
@@ -120,21 +124,21 @@ public class GameBoard extends JPanel implements IGameBoard {
             }
 
             add(shipDisplayer, BorderLayout.SOUTH);
+
+
         }
     }
 
-    public void addShipSelectionButtons(JPanel panel) {
-        JPanel carrierButton = new ShipSelectorButton("Aircraft Carrier", 1, new Carrier(0, 0, Orientation.RIGHT), Color.RED);
-        JPanel battleshipButton = new ShipSelectorButton("Battleship", 1, new Battleship(0, 0, Orientation.RIGHT), Color.PINK);
-        JPanel cruiserButton = new ShipSelectorButton("Cruiser", 2, new Cruiser(0, 0 , Orientation.RIGHT), Color.ORANGE);
-        JPanel destroyerButton = new ShipSelectorButton("Destroyer", 2, new Destroyer(0, 0, Orientation.RIGHT), Color.yellow);
-        JPanel boatButton = new ShipSelectorButton("Boat", 3, new Boat(0, 0, Orientation.RIGHT), Color.lightGray);
+    private void addShipSelectionButtons() {
+        shipSelectionButtons.add(new ShipSelectorButton("Aircraft Carrier", 1, new Carrier(0, 0, Orientation.RIGHT), Color.RED));
+        shipSelectionButtons.add(new ShipSelectorButton("Battleship", 1, new Battleship(0, 0, Orientation.RIGHT), Color.PINK));
+        shipSelectionButtons.add(new ShipSelectorButton("Cruiser", 2, new Cruiser(0, 0 , Orientation.RIGHT), Color.ORANGE));
+        shipSelectionButtons.add(new ShipSelectorButton("Destroyer", 2, new Destroyer(0, 0, Orientation.RIGHT), Color.yellow));
+        shipSelectionButtons.add(new ShipSelectorButton("Boat", 3, new Boat(0, 0, Orientation.RIGHT), Color.lightGray));
 
-        panel.add(carrierButton);
-        panel.add(battleshipButton);
-        panel.add(cruiserButton);
-        panel.add(destroyerButton);
-        panel.add(boatButton);
+        for (ShipSelectorButton button : shipSelectionButtons) {
+            shipSelectionPanel.add(button);
+        }
     }
 
 

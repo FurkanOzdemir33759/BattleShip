@@ -5,6 +5,7 @@ package GUI.Enums;
  */
 public enum Phase {
     MAIN_MENU,
+    SHIP_PLACEMENT,
     GAME_ACTION,
     GAME_NOTIFICATION
 }
