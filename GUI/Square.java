@@ -32,6 +32,7 @@ public class Square extends JPanel {
         this.miss = false;
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
         setBackground(Color.BLUE);
+        setPreferredSize(new Dimension(60, 60));
     }
 
     /**

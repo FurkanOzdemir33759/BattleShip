@@ -3,6 +3,7 @@ package GameManager.Ships;
 import GameManager.Enums.Orientation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class ShipObject {
@@ -95,7 +96,7 @@ public class ShipObject {
         return new Coordinate(currentPosition.x + offset.x, currentPosition.y + offset.y);
     }
 
-    ArrayList<Coordinate> getPlacementCoordinates() {
+    private ArrayList<Coordinate> getPlacementCoordinates() {
         ArrayList<Coordinate> result = new ArrayList<>();
         result.add(coordinate);
         Coordinate lastCoordinate = coordinate;
@@ -107,5 +108,22 @@ public class ShipObject {
         }
 
         return result;
+    }
+
+    private ArrayList<Integer> coordToIntArray(Coordinate coord) {
+        return new ArrayList<Integer>(Arrays.asList(coord.x, coord.y));
+    }
+
+    public ArrayList<ArrayList<Integer>> getShipLayoutForButton() {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        Coordinate lastCoordinate = new Coordinate(0,0);
+
+        for (int direction:shipLayout) {
+            Coordinate next = relativeToAbsoluteCoordinate(lastCoordinate, Orientation.RIGHT, direction);
+            res.add(coordToIntArray(next));
+            lastCoordinate = next;
+        }
+
+        return res;
     }
 }
