@@ -25,8 +25,13 @@ public class GameProgression implements IGameProgression {
      * @param playInfo The play info of the current turn.
      */
     public final void evaluatePlay(PlayInfo playInfo) {
-        // TO DO
-    }
+        boolean hit = attack(playInfo.getX(), playInfo.getY());
+        if (hit) {
+            notification.displayHitMiss(true); // Hit
+        } else {
+            notification.displayHitMiss(false); // Miss
+        }
+        endTurn();    }
 
     /**
      * Allows the player to attack.
@@ -41,7 +46,7 @@ public class GameProgression implements IGameProgression {
             return false;
         }
         targetSquare.setHit(true);
-        if (targetSquare.hasShip()) {
+        if (targetSquare.isOccupied()) {
             notification.displayHitMiss(true); // Hit
             return true;
         } else {
@@ -58,11 +63,11 @@ public class GameProgression implements IGameProgression {
      */
     public boolean place(int x, int y) {
         Square targetSquare = gameBoard.getSquare(x, y);
-        if (targetSquare.hasShip()) {
+        if (targetSquare == null || targetSquare.isOccupied()) {
             notification.displayGameResults("There is already a ship here."); // Placement failed
             return false;
         }
-        targetSquare.setShip(true);
+        targetSquare.setOccupied(true);
         return true;
     }
 
@@ -70,7 +75,7 @@ public class GameProgression implements IGameProgression {
      * Signals that the turn has ended.
      */
     public void endTurn() {
-        //TO DO
-    }
+        playerTurn = !playerTurn; // Turn ends, switch player
+        notification.displayGameResults(playerTurn ? "Player's turn" : "AI's turn");    }
 
 }
