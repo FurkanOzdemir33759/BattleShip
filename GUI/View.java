@@ -2,6 +2,8 @@ package GUI;
 
 import GameManager.GameManager;
 
+import javax.swing.*;
+
 public class View {
     /**
      * The game manager.
