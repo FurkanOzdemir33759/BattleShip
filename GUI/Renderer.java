@@ -73,5 +73,22 @@ public class Renderer extends JFrame {
 
     }
 
+    public void RenderUI(JPanel uiPass_){
+        layeredPane.remove(uiPass);
+        panelPass = uiPass_;
+
+
+        panelPass.setBounds(0, 0, 1280, 720);
+
+        Dimension panelSize = panelPass.getPreferredSize();
+        panelPass.setBounds((1280 - panelSize.width) / 2, (720 - panelSize.height) / 2, panelSize.width, panelSize.height);
+
+        layeredPane.add(uiPass,JLayeredPane.DEFAULT_LAYER);
+
+        layeredPane.revalidate();
+        layeredPane.repaint();
+
+    }
+
 
 }
