@@ -25,12 +25,14 @@ public class ShipObject {
             this.x = x;
             this.y = y;
         }
+
     }
 
     /**
      * Coordinates of the head of the ship.
      */
     private Coordinate coordinate;
+    private String name;
     /**
      * Orientation of the ship.
      */
@@ -125,5 +127,12 @@ public class ShipObject {
         }
 
         return res;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getName() {
+        return name;
     }
 }

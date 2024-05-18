@@ -88,17 +88,20 @@ public class GameBoard extends JPanel implements IGameBoard {
     }
 
     class ShipSelectorButton extends JPanel {
+        private ShipObject shipObject;
         private JButton button;
         private JLabel counter;
         private int max_allowed;
         private int current_count;
         private JPanel shipDisplayer;
 
-        JButton getShipSelectorButton() {
+        JButton getButton() {
             return button;
         }
 
         private ShipSelectorButton(String buttonName, int max_allowed, ShipObject shipObject, Color shipColor) {
+            this.shipObject = shipObject;
+
             setLayout(new FlowLayout());
             setPreferredSize(new Dimension(200, 100));
 
@@ -125,7 +128,14 @@ public class GameBoard extends JPanel implements IGameBoard {
 
             add(shipDisplayer, BorderLayout.SOUTH);
 
-
+            button.addActionListener(e -> {
+                if (selectedShip == null) {
+                    selectedShip = this.shipObject;
+                    System.out.println("Selected ship " + this.shipObject.getName());
+                } else {
+                    // Notify the player that they have selected a ship already.
+                }
+            });
         }
     }
 
