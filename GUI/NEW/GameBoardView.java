@@ -7,23 +7,23 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameBoardView extends JPanel {
-    private BoardView boardP1 = new BoardView(Player.P1);
-    private BoardView boardP2 = new BoardView(Player.P2);
-    private PlayerInfoView infoP1 = new PlayerInfoView(Player.P1);
-    private PlayerInfoView infoP2 = new PlayerInfoView(Player.P2, true);
-    private JPanel infoGame = new JPanel();
+    private final BoardView boardP1 = new BoardView(Player.P1);
+    private final BoardView boardP2 = new BoardView(Player.P2);
+    private final PlayerInfoView infoP1 = new PlayerInfoView(Player.P1);
+    private final PlayerInfoView infoP2 = new PlayerInfoView(Player.P2, true);
+    private final FleetView fleetView = new FleetView();
+    private final JPanel infoGame = new JPanel();
 
     public GameBoardView() {
-
         setBackground(PALETTE.BACKGROUND);
         setAbsoluteSize(this, new Dimension(1280, 720));
-        setLayout(null); // Absolute layout;
+        setLayout(null); // Absolute layout
 
-
-        placeAbsoluteComponent(boardP1, 40, 110, 560, 560);
-        placeAbsoluteComponent(boardP2, 660, 110, 560, 560);
+        placeAbsoluteComponent(boardP1, 40, 210, 560, 560);
+        placeAbsoluteComponent(boardP2, 660, 210, 560, 560);
         placeAbsoluteComponent(infoP1, 10, 10, 400, 90);
         placeAbsoluteComponent(infoP2, 850, 10, 400, 90);
+        placeAbsoluteComponent(fleetView, 40, 100, 400, 100);
         placeAbsoluteComponent(infoGame, 420, 10, 420, 90);
 
 
@@ -31,6 +31,7 @@ public class GameBoardView extends JPanel {
         add(boardP2);
         add(infoP1);
         add(infoP2);
+        add(fleetView);
         add(infoGame);
 
     }
@@ -56,7 +57,7 @@ public class GameBoardView extends JPanel {
 
     public static void main(String[] args) {
         JFrame window = new JFrame();
-        window.setSize(1280, 720);
+        window.setSize(1280, 820);
         GameBoardView gameBoardView = new GameBoardView();
         gameBoardView.getBoardP1().addActionListenerToTiles(e -> {
             JButton tileButton = (JButton) e.getSource();
