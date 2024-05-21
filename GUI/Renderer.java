@@ -1,94 +1,40 @@
 package GUI;
 
-import GUI.Enums.Phase;
 import javax.swing.*;
-import java.awt.*;
 
-
-/**
- * This class is responsible for rendering the game.
- */
 public class Renderer extends JFrame {
 
-    private JPanel container;
+    private JPanel panelPass = new JPanel();
 
-    /**
-     * Tells renderer what to render currently.
-     */
-    private Phase phase = Phase.MAIN_MENU;
+    private void setBounds(JPanel panel) {
+        panel.setBounds(0, 0, 1280, 720);
+    }
 
-
-    private JLayeredPane layeredPane;
-    private JPanel panelPass;
-
-    private JPanel uiPass;
-    Renderer(JPanel initialPanel) {
-
+    protected Renderer () {
         setTitle("BattleShip");
         setSize(1280, 720);
+
         setResizable(false);
-        Image icon = Toolkit.getDefaultToolkit().getImage("Resources/AppIcon.jpeg");
-        setIconImage(icon);
+        setFocusable(true);
+        requestFocusInWindow();
+        setLayout(null);
 
-        uiPass = new JPanel();
-        uiPass.setOpaque(false);
-        panelPass = initialPanel;
+        setBounds(panelPass);
 
-        panelPass.setBounds(0, 0, 1280, 720);
-        uiPass.setBounds(0, 0, 1280, 720);
-
-
-        layeredPane = new JLayeredPane();
-        layeredPane.setPreferredSize(new Dimension(1280, 720));
-        layeredPane.setLayout(null);  // Use absolute positioning
-
-        add(layeredPane);
-
-        layeredPane.add(panelPass,JLayeredPane.DEFAULT_LAYER);
-        layeredPane.add(uiPass,JLayeredPane.PALETTE_LAYER);
-
-        //setContentPane(currentPanel);
-        pack();
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
-
     }
 
-
-    public  void Render( JPanel panelPass_ ){
-        layeredPane.remove(panelPass);
+    public void draw( JPanel panelPass_ ){
+        remove(panelPass);
         panelPass = panelPass_;
 
+        setBounds(panelPass);
 
-        panelPass.setBounds(0, 0, 1280, 720);
+        add(panelPass);
 
-        Dimension panelSize = panelPass.getPreferredSize();
-        panelPass.setBounds((1280 - panelSize.width) / 2, (720 - panelSize.height) / 2, panelSize.width, panelSize.height);
-
-        layeredPane.add(panelPass,JLayeredPane.DEFAULT_LAYER);
-
-        layeredPane.revalidate();
-        layeredPane.repaint();
-
+        revalidate();
+        repaint();
     }
-
-    public void RenderUI(JPanel uiPass_){
-        layeredPane.remove(uiPass);
-        panelPass = uiPass_;
-
-
-        panelPass.setBounds(0, 0, 1280, 720);
-
-        Dimension panelSize = panelPass.getPreferredSize();
-        panelPass.setBounds((1280 - panelSize.width) / 2, (720 - panelSize.height) / 2, panelSize.width, panelSize.height);
-
-        layeredPane.add(uiPass,JLayeredPane.DEFAULT_LAYER);
-
-        layeredPane.revalidate();
-        layeredPane.repaint();
-
-    }
-
 
 }
