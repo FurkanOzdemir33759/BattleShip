@@ -1,62 +1,41 @@
 package GUI;
 
-import GameManager.GameManager;
+import GameManager.Player;
 
 import javax.swing.*;
 
 public class View {
-    /**
-     * The game manager.
-     */
-    private GameManager manager;
-    /**
-     * The game board according to the board size given.
-     */
-    private GameBoard gameBoard;
+    private Renderer renderer = null;
+    private MainMenu mainMenu = new MainMenu();
+    private GameBoard gameBoard = new GameBoard();
 
-    /**
-     * The main menu of the game.
-     */
-    private MainMenu mainMenu;
-
-    /**
-     * The notification handler.
-     */
-    private Notification notification;
-
-    /**
-     * Renderer of all the above.
-     */
-    private Renderer renderer;
-
-    /**
-     * Constructor for the view.
-     * @param manager The game manager.
-     */
-    public View(GameManager manager) {
-        this.manager = manager;
-
-        this.notification = new Notification();
-        this.mainMenu = new MainMenu();
-        this.gameBoard = new GameBoard();
-
-        renderer = new Renderer(this.mainMenu);
+    public View() {
+        renderer = new Renderer();
+        renderer.draw(mainMenu);
     }
 
-    public  void displayGameBoard(){
-        renderer.Render(getGameBoard());
-
-    }
-    public  void displaySettings(){
-        renderer.Render(getNotification());
-
+    public void displayGameBoard() {
+        renderer.draw(gameBoard);
     }
 
-    public MainMenu getMainMenu() {return this.mainMenu;}
-    public GameBoard getGameBoard() {return this.gameBoard;}
-    public Notification getNotification() {return this.notification;}
-
-    public void update(){
-        //TO DO
+    public void setGameBoard(Board playerBoard, Board aiBoard) {
+        gameBoard = new GameBoard(playerBoard,aiBoard);
     }
+
+    public void displayMainMenu() {
+        renderer.draw(mainMenu);
+    }
+
+    public void displayResultScreen(Player winner , int playerScore, int aiScore){
+        renderer.draw(new Result(winner,playerScore,aiScore));
+    }
+    public MainMenu getMainMenu() {
+        return mainMenu;
+    }
+
+    public GameBoard getGameBoard() {
+        return gameBoard;
+    }
+
+    public  Renderer getRenderer() { return renderer;}
 }
