@@ -1,8 +1,5 @@
 package GameController;
 
-import GUI.GameBoard;
-import GUI.MainMenu;
-import GUI.Notification;
 import GameManager.*;
 import GUI.View;
 
@@ -14,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import GUI.Board;
 import GameManager.Enums.*;
+import GameManager.Enums.Player;
 
 import javax.swing.*;
 /**
@@ -24,9 +22,15 @@ public class GameController {
      * The manager of the game.
      */
     private GameManager manager;
+    /**
+     * AI
+     */
+    private AI ai = new AI();
 
-
-    private boolean itsPlayersTurn;
+    /**
+     * Game Progression Handler
+     */
+    private GameProgression gameProgression;
 
     private Ship currentSelectedShip;
     /**
@@ -42,7 +46,6 @@ public class GameController {
     public GameController(GameManager manager, View view) {
         this.manager = manager;
         this.view = view;
-        this.itsPlayersTurn = true;
 
 
         view.getMainMenu().getStartButton().addActionListener(e->{
@@ -185,4 +188,93 @@ public class GameController {
 
         }
     }
+
+    private class AiBoardMouseListener extends MouseAdapter {
+        public void mousePressed(MouseEvent e) {
+            if (gameProgression.getGamePhase() == Phase.PLAYER_ATTACK) {
+                Board playerBoard = view.getGameBoard().getPlayerBoard();
+                Board aiBoard = view.getGameBoard().getAiBoard();
+                Point tilePos = aiBoard.viewToWorldPoint(e.getPoint());
+
+                int x = tilePos.x;
+                int y = tilePos.y;
+                Tile tileData = manager.getAiGrid().get(x).get(y);
+
+                switch (tileData) {
+                    case EMPTY -> {manager.setAiTileData(Tile.REVEALED_EMPTY, x, y);
+                        gameProgression.nextPhase();
+                        view.getGameBoard().getGameInfo().getPhaseText().setText("BRACE YOURSELF!");
+                        aiBoard.updateGrid(manager.getAiGrid());
+                        aiAttack(playerBoard);
+                        manager.recordPlayerMiss();
+                        view.getGameBoard().updatePlayerInfo(manager.getPlayerScore());
+
+
+                    }
+                    case REVEALED_SHIP -> {}
+                    case REVEALED_EMPTY -> {}
+                    default -> {manager.setAiTileData(Tile.REVEALED_SHIP, x, y);
+                        aiBoard.updateGrid(manager.getAiGrid());
+                        manager.reduceAiHealth();
+                        view.getGameBoard().updatePlayerInfo(manager.getPlayerScore());
+                        if (manager.getAiHealth() == 0) {
+                            System.out.println("Player Won");
+                            playerVictory();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void aiAttack(Board playerBoard) {
+
+
+        Point aiTarget = ai.nextTarget();
+        Tile aiTargetData = manager.getPlayerGrid().get(aiTarget.x).get(aiTarget.y);
+
+        Timer timer  = new Timer(800, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                switch (aiTargetData) {
+                    case EMPTY -> {manager.setPlayerTileData(Tile.REVEALED_EMPTY, aiTarget.x, aiTarget.y);
+                        ai.setGridMemory(aiTarget.x, aiTarget.y, MemoryTile.MISS);
+                        gameProgression.nextPhase();
+                        view.getGameBoard().getGameInfo().getPhaseText().setText("ATTACK!");
+                        playerBoard.updateGrid(manager.getPlayerGrid());
+                        manager.recordAiMiss();
+                        view.getGameBoard().updateAiInfo(manager.getAiScore());
+                    }
+                    case REVEALED_SHIP -> {}
+                    case REVEALED_EMPTY -> {}
+                    default -> {
+
+                        manager.setPlayerTileData(Tile.REVEALED_SHIP, aiTarget.x, aiTarget.y);
+                        ai.setGridMemory(aiTarget.x, aiTarget.y, MemoryTile.HIT);
+                        playerBoard.updateGrid(manager.getPlayerGrid());
+                        manager.reducePlayerHealth();
+                        view.getGameBoard().updateAiInfo(manager.getAiScore());
+                        if (manager.getPlayerHealth() != 0) {
+                            aiAttack(playerBoard);
+                        } else {
+                            System.out.println("AI Won");
+                            aiVictory();
+                        }
+                    }
+                }
+            };
+        });
+        timer.setRepeats(false);
+        timer.start();
+
+    }
+
+    private void playerVictory() {
+
+        this.view.displayResultScreen(Player.PLAYER, manager.getPlayerScore(), manager.getAiScore());
+    }
+    private void aiVictory() {
+        this.view.displayResultScreen(Player.AI, manager.getPlayerScore(), manager.getAiScore());
+    }
 }
+
