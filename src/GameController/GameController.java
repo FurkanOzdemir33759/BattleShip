@@ -3,9 +3,19 @@ package GameController;
 import GUI.GameBoard;
 import GUI.MainMenu;
 import GUI.Notification;
-import GameManager.GameManager;
+import GameManager.*;
 import GUI.View;
 
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import java.awt.event.MouseMotionAdapter;
+import GUI.Board;
+import GameManager.Enums.*;
+
+import javax.swing.*;
 /**
  * The controller class of the game.
  */
@@ -18,6 +28,7 @@ public class GameController {
 
     private boolean itsPlayersTurn;
 
+    private Ship currentSelectedShip;
     /**
      * The view of the game.
      */
@@ -96,5 +107,82 @@ public class GameController {
     public void updateView() {
         //TO DO
 
+    }
+
+    private class PlayerBoardMouseListener extends MouseAdapter {
+        public  void mousePressed(MouseEvent e){
+            Board playerBoard = view.getGameBoard().getPlayerBoard();
+            Point tilePos =  playerBoard.viewToWorldPoint(e.getPoint());
+            int x = tilePos.x;
+            int y = tilePos.y;
+            Tile tileData = manager.getPlayerGrid().get(x).get(y);
+            currentSelectedShip =  manager.getPlayerShips().get(tileData);
+
+
+        }
+
+    }
+
+    private class PlayerBoardDragListener extends MouseMotionAdapter {
+
+        public  void mouseDragged(MouseEvent e){
+            Board playerBoard = view.getGameBoard().getPlayerBoard();
+            Point tilePos =  playerBoard.viewToWorldPoint(e.getPoint());
+            if(currentSelectedShip != null){
+                boolean canPlace =  manager.canPlace( manager.getPlayerGrid(),currentSelectedShip, tilePos.x,tilePos.y, currentSelectedShip.orientation );
+
+                if(canPlace){
+                    manager.removeShip(manager.getPlayerGrid(), currentSelectedShip);
+                    manager.placeShip( manager.getPlayerGrid(),currentSelectedShip, tilePos.x,tilePos.y, currentSelectedShip.orientation );
+                    playerBoard.updateGrid(manager.getPlayerGrid());
+                }
+
+            }
+
+        }
+    }
+
+    private  class PLayerBoardKeyListener implements KeyListener {
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            Board playerBoard = view.getGameBoard().getPlayerBoard();
+
+            if(e.getKeyCode() == KeyEvent.VK_R){
+
+                if(currentSelectedShip != null){
+
+                    Orientation ori =  currentSelectedShip.orientation;
+                    switch (currentSelectedShip.orientation){
+                        case VERTICAL -> ori = Orientation.HORIZONTAL;
+                        case HORIZONTAL -> ori = Orientation.VERTICAL;
+                    }
+
+                    boolean canRotate =  manager.canPlace( manager.getPlayerGrid(),currentSelectedShip, currentSelectedShip.worldPosX , currentSelectedShip.worldPosY, ori);
+
+                    if(canRotate){
+
+
+                        manager.removeShip(manager.getPlayerGrid(), currentSelectedShip);
+                        currentSelectedShip.orientation = ori;
+                        manager.placeShip( manager.getPlayerGrid(),currentSelectedShip,currentSelectedShip.worldPosX,
+                                currentSelectedShip.worldPosY, currentSelectedShip.orientation);
+                        playerBoard.updateGrid(manager.getPlayerGrid());
+                    }
+
+                }
+            }
+
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+
+        }
     }
 }

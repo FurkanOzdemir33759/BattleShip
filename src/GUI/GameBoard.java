@@ -1,6 +1,8 @@
 package GUI;
 
 
+import GameManager.Enums.*;
+
 import javax.swing.*;
 
 import java.util.ArrayList;

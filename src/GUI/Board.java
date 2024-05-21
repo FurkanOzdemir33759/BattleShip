@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+
+import GameManager.Enums.*;
+
 public class Board extends JPanel {
     private Point initialClick;
     private final int GRID_SIZE = 56;
