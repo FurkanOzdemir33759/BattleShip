@@ -1,83 +1,48 @@
 package GUI;
 
-import GUI.Interfaces.IMainMenu;
-
-
 import javax.swing.*;
 import java.awt.*;
 
-public class MainMenu extends JPanel implements IMainMenu {
-
-
-
-
-
-    @Override
-    public void startGame() {
-        // Implementation code here
-
-
-    }
-
-    @Override
-    public void accessSettings() {
-        // Implementation code here
-
-    }
-
-    @Override
-    public void exitGame() {
-        // Implementation code here
-
-    }
-    JButton playButton;
-    JButton settingsButton;
-    JButton exitButton;
+public class MainMenu extends JPanel {
+    private JButton playButton;
+    private JButton exitButton;
     public MainMenu() {
 
+        setBackground(GUI_PALETTE.BACKGROUND);
         setLayout(null);
-        JLabel gameName = new JLabel("BATTLESHIP ");
-        gameName.setFont(new Font("Georgia",Font.BOLD,40));
-        gameName.setBounds(500,50,300,150);
-        JLabel background1 = new JLabel(new ImageIcon("Resources/Background1.jpeg"));
+        JLabel gameName = new JLabel("BATTLESHIP");
+        GUI_Util.placeAbsoluteComponent(gameName, 440, 100, 400, 100);
+        gameName.setHorizontalAlignment(SwingConstants.CENTER);
+        gameName.setVerticalAlignment(SwingConstants.CENTER);
+        gameName.setFont(new Font("Monospaced", Font.ITALIC, 50));
+        gameName.setForeground(GUI_PALETTE.PLAYER_INFO_TEXT_COLOR);
 
         playButton = new JButton("PLAY");
-        playButton.setFont(new Font("Georgia", Font.PLAIN,20));
-        playButton.setBounds(540,200,200,50);
-
-        settingsButton = new JButton("SETTINGS");
-        settingsButton.setFont(new Font("Georgia",Font.PLAIN,20));
-        settingsButton.setBounds(540,300,200,50);
-
-        exitButton = new JButton("EXIT");
-        exitButton.setFont(new Font("Georgia", Font.PLAIN,20));
-        exitButton.setBounds(540,400,200,50);
-
-        background1.setVisible(true);
-        background1.setIcon(new ImageIcon("Resources/Background1.jpeg"));
-        background1.setText("Background not loaded");
-        background1.setBounds(0,0,1280,720);
+        GUI_Util.placeAbsoluteComponent(playButton, 10, 300, 1240, 100);
+        GUI_Util.alterButtonLook(playButton);
 
 
+        exitButton = new JButton("QUIT");
+        GUI_Util.alterButtonLook(exitButton);
+        GUI_Util.placeAbsoluteComponent(exitButton, 10, 410, 1240, 100);
 
+        JLabel tutorial1 = new JLabel("<html><div style='text-align: center;'>DRAG THE SHIPS AROUND TO SET THE BOARD.<br>PRESS 'R' TO ROTATE THE SELECTED SHIP.<br>DESTROY YOUR OPPONENT'S SHIPS BY CLICKING ON THEIR BOARD.</div></html>");
+        tutorial1.setForeground(GUI_PALETTE.PLAYER_INFO_TEXT_COLOR);
+        tutorial1.setHorizontalAlignment(SwingConstants.CENTER);
+        tutorial1.setVerticalAlignment(SwingConstants.CENTER);
+        tutorial1.setFont(new Font("SansSerif", Font.ITALIC, 18));
+        GUI_Util.placeAbsoluteComponent(tutorial1, 240, 520, 800, 200);
 
         add(gameName);
         add(playButton);
-        add(settingsButton);
         add(exitButton);
-        add(background1);
-
+        add(tutorial1);
     }
 
-
-    public JButton getStartButton(){
+    public JButton getStartButton() {
         return playButton;
-    }
-    public JButton getSettingsButton(){
-        return settingsButton;
     }
     public JButton getExitButton(){
         return exitButton;
     }
-
 }
