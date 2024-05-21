@@ -9,6 +9,7 @@ import javax.swing.*;
  */
 public class View {
     private Renderer renderer = null;
+    private Notification notification = new Notification();
     private MainMenu mainMenu = new MainMenu();
     private GameBoard gameBoard = new GameBoard();
 
@@ -53,7 +54,7 @@ public class View {
      * @param aiScore     The score of the AI.
      */
     public void displayResultScreen(Player winner , int playerScore, int aiScore){
-        renderer.draw(new Result(winner,playerScore,aiScore));
+        renderer.draw(notification.new Result(winner,playerScore,aiScore));
     }
 
     /**

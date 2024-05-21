@@ -49,8 +49,8 @@ public class GameFinishInfo {
      */
     public Player getWinnerAsEnum() throws IllegalArgumentException {
         return switch (winner) {
-            case 0 -> Player.P1;
-            case 1 -> Player.P2;
+            case 0 -> Player.PLAYER;
+            case 1 -> Player.AI;
             default -> throw new IllegalArgumentException("Invalid winner number: " + winner);
         };
     }

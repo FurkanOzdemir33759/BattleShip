@@ -8,12 +8,13 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class GameBoard extends JPanel {
+    private Notification notification = new Notification();
 
     private Board playerBoard ;
     private Board aiBoard;
-    private PlayerInfo playerInfo = new PlayerInfo(Player.PLAYER);
-    private PlayerInfo aiInfo = new PlayerInfo(Player.AI);
-    private GameInfo gameInfo = new GameInfo();
+    private Notification.PlayerInfo playerInfo = notification.new PlayerInfo(Player.PLAYER);
+    private Notification.PlayerInfo aiInfo = notification.new PlayerInfo(Player.AI);
+    private Notification.GameInfo gameInfo = notification.new GameInfo();
 
     public GameBoard(Board playerBoard, Board  aiBoard) {
 
@@ -45,7 +46,7 @@ public class GameBoard extends JPanel {
     public Board getPlayerBoard() {
         return playerBoard;
     }
-    public GameInfo getGameInfo() {return gameInfo;}
+    public Notification.GameInfo getGameInfo() {return gameInfo;}
 
     public  void  updatePlayerInfo(int score){  playerInfo.updateScore(score);}
     public  void  updateAiInfo(int score){  aiInfo.updateScore(score);}
