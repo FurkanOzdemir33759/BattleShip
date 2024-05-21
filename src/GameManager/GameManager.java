@@ -1,8 +1,11 @@
 package GameManager;
 
+import GameManager.Enums.Orientation;
+import GameManager.Enums.Tile;
+
 import java.util.*;
 
-public class GameData {
+public class GameManager {
     private final int boardSize = 10;
     private int aiHealth = 17;
     private int playerHealth = 17;
@@ -26,7 +29,7 @@ public class GameData {
 
 
 
-    public  GameData(){
+    public  GameManager(){
 
         playerShips.put(Tile.SHIP_DESTROYER,new DES() );
         playerShips.put(Tile.SHIP_CRUISER,new CR() );

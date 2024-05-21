@@ -1,0 +1,13 @@
+package GameManager.Enums;
+
+
+public enum Tile {
+    SHIP_AIRCRAFT_CARRIER,
+    SHIP_BATTLESHIP,
+    SHIP_SUBMARINE,
+    SHIP_CRUISER,
+    SHIP_DESTROYER,
+    EMPTY,
+    REVEALED_EMPTY,
+    REVEALED_SHIP
+}

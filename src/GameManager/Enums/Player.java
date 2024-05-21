@@ -7,10 +7,10 @@ public enum Player {
     /**
      * Player 1 which is always an actual player.
      */
-    P1,
+    PLAYER,
 
     /**
      * Player 2 which can be either another player or AI.
      */
-    P2
+    AI
 }
