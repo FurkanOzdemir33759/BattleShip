@@ -1,6 +1,6 @@
 package GUI;
 
-import GameManager.Player;
+import GameManager.Enums.*;
 import javax.swing.*;
 
 /**
