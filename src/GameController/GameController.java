@@ -27,16 +27,25 @@ public class GameController {
      */
     private AI ai = new AI();
 
+
+
     /**
      * Game Progression Handler
      */
-    private GameProgression gameProgression;
+    private GameProgression gameProgression = new GameProgression();
 
     private Ship currentSelectedShip;
     /**
      * The view of the game.
      */
     private View view;
+
+    private  PlayerBoardMouseListener playerBoardMouseListener = new PlayerBoardMouseListener();
+    private  PlayerBoardDragListener playerBoardDragListener = new PlayerBoardDragListener();
+
+    private  PLayerBoardKeyListener pLayerBoardKeyListener = new PLayerBoardKeyListener();
+    private AiBoardMouseListener aiBoardMouseListener = new AiBoardMouseListener();
+
 
     /**
      * Constructor for the GameController
@@ -48,15 +57,38 @@ public class GameController {
         this.view = view;
 
 
-        view.getMainMenu().getStartButton().addActionListener(e->{
+        this.view.getMainMenu().getStartButton().addActionListener(e -> {
+            Board playerBoard = new Board(Player.PLAYER, manager.getPlayerGrid());
+            Board aiBoard = new Board(Player.AI, manager.getAiGrid());
+            aiBoard.addMouseListener(aiBoardMouseListener);
 
+            playerBoard.addMouseListener(playerBoardMouseListener);
+            playerBoard.addMouseMotionListener(playerBoardDragListener);
+            view.getRenderer().addKeyListener(pLayerBoardKeyListener);
+
+            view.setGameBoard(playerBoard, aiBoard);
             view.displayGameBoard();
 
+            // QUIT in GameBoard
+            this.view.getGameBoard().getGameInfo().getReturnButton().addActionListener(e_-> {
+                System.exit(0);
+            });
+
+            // START in GameBoard
+            this.view.getGameBoard().getGameInfo().getSkipPlacementPhaseButton().addActionListener(e_ -> {
+                if (gameProgression.getGamePhase() == Phase.SHIP_PLACEMENT) {
+                    gameProgression.nextPhase();
+                    this.view.getGameBoard().getGameInfo().getSkipPlacementPhaseButton().setVisible(false);
+                    this.view.getGameBoard().getGameInfo().getPhaseText().setText("ATTACK!");
+                    playerBoard.removeMouseListener(playerBoardMouseListener);
+                    playerBoard.removeMouseMotionListener(playerBoardDragListener);
+                    view.getRenderer().removeKeyListener(pLayerBoardKeyListener);
+                }
+            });
         });
 
-        view.getMainMenu().getExitButton().addActionListener(e -> {
+        this.view.getMainMenu().getExitButton().addActionListener(e -> {
             System.exit(0);
-
         });
     }
 
