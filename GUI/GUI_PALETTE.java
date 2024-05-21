@@ -10,6 +10,7 @@ public class GUI_PALETTE {
     public static Color PLAYER_INFO_TEXT_COLOR = new Color(0xFFE8C8);
     public static Color BACKGROUND = new Color(0x212A3E);
     public static Color SHIP_AIRCRAFT_CARRIER = new Color(0xF4CE14);
+
     public static Color SHIP_BATTLESHIP = new Color(0x836FFF);
     public static Color SHIP_CRUISER = new Color(0x304D30);
     public static Color SHIP_SUBMARINE = new Color(0x47A992);

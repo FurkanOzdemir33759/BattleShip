@@ -13,6 +13,7 @@ public class GUI_Util {
         component.setPreferredSize(size);
         component.setMaximumSize(size);
         component.setMinimumSize(size);
+        
     }
 
     public static void placeAbsoluteComponent(JComponent component, int x, int y, int w, int h) {
