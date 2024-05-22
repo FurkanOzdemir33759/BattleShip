@@ -35,7 +35,7 @@ javac -d out -sourcepath src src/Main.java
 Run the compiled main class using the following command:
 
 ```sh
-java -cp out out/production/BattleShip/Main
+java -cp out Main
 ```
 
 ### Platform Specific Notes
